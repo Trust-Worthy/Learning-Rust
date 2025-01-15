@@ -41,7 +41,12 @@ fn example_dos() {
 
 }
 
+fn example_tres() {
+    let mut _s: String = String::from("Ayyyeeeee");
+    _s = String::from("Ohhhhh");
 
+    println!("{_s}, world!");
+}
 
 
 
@@ -51,6 +56,7 @@ fn example_dos() {
 fn main() {
     ex_uno();
     example_dos();
+    example_tres();
 }
 
 
