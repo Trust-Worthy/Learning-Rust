@@ -24,9 +24,21 @@ fn main() {
     another_function(5);
     print_labeled_measuremeht(5, 'h');
     expression_ex();
+
+    let x:i32 = five();
+
+    println!("The value of x is: {x}");
 }
 
-/// You have to always put type annotatiosn in function definitions
+/// Func example with parameter
+/// 
+/// #### Arguments
+/// 
+/// * 'x' - a signed 32 bit number 
+/// 
+/// #### Returns 
+/// 
+/// Nothing
 fn another_function(x:i32) {
     println!("The value of x is: {x}");
 }
@@ -44,4 +56,9 @@ fn expression_ex() {
     };
 
     println!("The value of y is: {y}");
+}
+
+/// Returns the number 5
+fn five() -> i32 {
+    5
 }
