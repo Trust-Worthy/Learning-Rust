@@ -55,16 +55,38 @@ fn example_cuatro() {
     println!("s1 = {s1}, s2 = {s2}");
 }
 
+fn takes_ownership(some_string: String) {
+    println!("takes_ownership func has ownership of {some_string}");
+    
+}// here some_string goes out of scope and `drop` is called. The backing
+// memory is freed;
+
+fn makes_copy(some_integer: i32) {
+    println!("makes_copy function is making a copy of {some_integer}");
+} // here, some_integer goes out of scope but nothing special happens because it's an integer
 
 
 
 
 
 fn main() {
-    ex_uno();
-    example_dos();
-    example_tres();
-    example_cuatro();
+    // ex_uno();
+    // example_dos();
+    // example_tres();
+    // example_cuatro();
+
+    let stringy:String = String::from("I'm a little string");
+    takes_ownership(stringy);
+
+    let x_wing:i32= 5;
+    makes_copy(x_wing);
+
+    // println!("{stringy}"); doesn't work because stringy is out of scope now :(
+
+    println!("{x_wing} is still winging because it was an integer");
+
+
+
 }
 
 
