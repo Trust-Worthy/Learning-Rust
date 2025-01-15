@@ -75,12 +75,15 @@ fn takes_and_gives_back(a_string: String) -> String { // a_string comes into sco
     a_string
 }
 
-fn calc_lens(_s: String) -> (String, usize) {
-    let length: usize = _s.len();
+/// this function is an example of borrowing
+fn calc_len(_s: &String) -> usize {
+    _s.len()
+} // Here, s goes out of scope. But critically, it does not have ownership of what it refers to, it is thus not dropped because it was never allocated
 
-    (_s,length)
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
 }
-
 
 fn main() {
     // ex_uno();
@@ -108,10 +111,25 @@ fn main() {
     println!("var s3:{s3} was given ownership by a series of steps:\ns2 gave it's ownership to a_string in the func `move` . \nThen a_string gave it's ownership to s3 via a `move`!");
 
 
-    let (s2,len ): (String,usize) = calc_lens("Hiii".to_string()); // that's cool that I can use .to_string so that I don't have to type out a whole variable
+    // let (s2,len ): (String,usize) = calc_len("Hiii".to_string()); // that's cool that I can use .to_string so that I don't have to type out a whole variable
 
-    println!("The length of '{s2}' is {len}.");
+    // println!("The length of '{s2}' is {len}.");
+
+    // doing the exact same thing but this time using a rust reference
+
+    let ref_str: String = String::from("hello");
+    let len: usize = calc_len(&ref_str);
+
+    println!("The length of '{ref_str}' is {len}.");
+
+
+    // You can't change something you're borrowing like you can in C with pointers
+    // below is an example of a mutable reference!
+    let mut mutating_str: String = String::from("hello");
+    change(&mut mutating_str);
+
     
+
 }
 
 
