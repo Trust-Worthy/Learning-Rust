@@ -15,7 +15,7 @@ fn main() {
     // println!("The value of x is: {x}");
 
     let x = 5;
-    let x = x + 1;
+    let x = x + 1; /// example of variable shadowing
 
     {
         let x = x * 2;
@@ -24,4 +24,9 @@ fn main() {
 
     println!("The value of x is: {x}");
 
+    /// This is why shadowing is useful --> you can change the type of the value but use the same variable name
+    let spaces = "   ";
+    let spaces = spaces.len();
+    println!("There are {spaces}!");
+    
 }
