@@ -24,7 +24,22 @@ fn ex_uno() {
 }
 
 
+fn example_dos() {
+    
+    // integer version_
+    let _x:u32 = 5;
+    let _y:u32 = _x;
 
+    // string version
+    let s1: String = String::from("hello");
+    let s2: String = s1;
+
+    //println!("{}, world",s1); // rust considers the original variable no longer valid
+
+
+    println!("{}, is the variable that survived the move!",s2);
+
+}
 
 
 
@@ -35,6 +50,7 @@ fn ex_uno() {
 
 fn main() {
     ex_uno();
+    example_dos();
 }
 
 
