@@ -75,6 +75,11 @@ fn takes_and_gives_back(a_string: String) -> String { // a_string comes into sco
     a_string
 }
 
+fn calc_lens(_s: String) -> (String, usize) {
+    let length: usize = _s.len();
+
+    (_s,length)
+}
 
 
 fn main() {
@@ -100,8 +105,13 @@ fn main() {
 
     println!("var s1 was given ownership --> val: {s1}");
     //println!("var s2 gave it's ownership away :( {s2}");
-    println!("var s3 was given ownership by a series of steps:\ns2 gave it's ownership to a_string in the func `move` . \nThen a_string gave it's ownership to s3 via a `move`!")
+    println!("var s3:{s3} was given ownership by a series of steps:\ns2 gave it's ownership to a_string in the func `move` . \nThen a_string gave it's ownership to s3 via a `move`!");
 
+
+    let (s2,len ): (String,usize) = calc_lens("Hiii".to_string()); // that's cool that I can use .to_string so that I don't have to type out a whole variable
+
+    println!("The length of '{s2}' is {len}.");
+    
 }
 
 
