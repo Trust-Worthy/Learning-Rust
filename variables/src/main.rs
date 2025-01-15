@@ -8,7 +8,7 @@
 
 fn floats() {
     let x = 2.0; // f64 --> 64 bit float
-    let y: f32 = 3.0 //f32 --> 32 bit float
+    let y: f32 = 3.0; //f32 --> 32 bit float
 
 }
 
@@ -42,18 +42,17 @@ fn compound_type() {
 
     let five_hunned: i32 = x.0;
     let six_point_four: f64 = x.1;
-    let one: u8 = x.2
+    let one: u8 = x.2;
 
 
 
 }
 
 fn array_type() {
-    
+
 }
 
-fn main() {
-    
+fn var_type() {
     // let mut x = 5;
     // println!("The value of x is: {x}");
     // x = 6;
@@ -73,7 +72,8 @@ fn main() {
     let spaces = "   ";
     let spaces = spaces.len();
     println!("There are {spaces}!");
-
+}
+fn main() {
     /**
      * Rust has 4 primary scalar types:
      * 1. integers
@@ -85,5 +85,10 @@ fn main() {
     // use u for unsigned integer and i for signed integer
     // tip: each signed variant can store numbers from -(2^n-1) --> 2^n-1 -1 inclusive where n is the number of bits
     // tip: unsigned variants can store numbers from 2^n-1
+
+    var_type();
+    floats();
+    chars();
+    compound_type();
 
 }
