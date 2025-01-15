@@ -48,6 +48,13 @@ fn example_tres() {
     println!("{_s}, world!");
 }
 
+fn example_cuatro() {
+    let s1:String = String::from("what up what up");
+    let s2:String = s1.clone();
+
+    println!("s1 = {s1}, s2 = {s2}");
+}
+
 
 
 
@@ -57,6 +64,7 @@ fn main() {
     ex_uno();
     example_dos();
     example_tres();
+    example_cuatro();
 }
 
 
