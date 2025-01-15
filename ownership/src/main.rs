@@ -65,7 +65,15 @@ fn makes_copy(some_integer: i32) {
     println!("makes_copy function is making a copy of {some_integer}");
 } // here, some_integer goes out of scope but nothing special happens because it's an integer
 
+fn gives_ownership() -> String { // will move its return values into the function that calls it
+    let some_string: String = String::from("yours");
+    return some_string; // can also just do some_string
+}
 
+fn takes_and_gives_back(a_string: String) -> String { // a_string comes into scope
+    // a_string is returned and moves out to the calling function
+    a_string
+}
 
 
 
@@ -86,6 +94,13 @@ fn main() {
     println!("{x_wing} is still winging because it was an integer");
 
 
+    let s1: String = gives_ownership();
+    let s2: String = String::from("hello");
+    let s3: String = takes_and_gives_back(s2);
+
+    println!("var s1 was given ownership --> val: {s1}");
+    //println!("var s2 gave it's ownership away :( {s2}");
+    println!("var s3 was given ownership by a series of steps:\ns2 gave it's ownership to a_string in the func `move` . \nThen a_string gave it's ownership to s3 via a `move`!")
 
 }
 
