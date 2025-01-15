@@ -83,4 +83,28 @@ fn loop_collection() {
         
         index +=1;
     }
+    // Ok there are some issues here
+    // 1. The code above could cause the the program to panic if the index value or test condition is incorrect.
+    // 2. If you changed the a array to have four elements but forgot to change the while condition to index < 4, 
+    // the code would panic
+    // This also makes the code slow because the compiler adds runtime code to perform the conditional check of whether the index is within the bounds of the array on every iteration!
+    // Which is very safe but makes it slow.
+    // Solution.... 
+
+    for element in a {
+        println!("The value is: {element}");
+    }
+
+    // using the for loopo means I wouldn't have to remember to change any other code
+    // for loops are more safe and concise in rust
+
+    // ex of how to do the countdown example on line 81 with a for loop
+    for number in (1..4).rev() {
+        println!("{number}");
+    }
+
+    println!("LIFTOFF!!!");
 }
+
+
+
