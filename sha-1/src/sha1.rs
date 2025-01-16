@@ -1,3 +1,12 @@
+// sha1.rs
+
+// These constants are derived from the fractional parts of the square roots of the first five primes.
+const H0: u32 = 0x67452301;
+const H1: u32 = 0xEFCDAB89;
+const H2: u32 = 0x98BADCFE;
+const H3: u32 = 0x10325476;
+const H4: u32 = 0xC3D2E1F0;
+
 pub struct Sha1;
 
 impl Sha1 {
@@ -11,7 +20,10 @@ impl Sha1 {
         // hash will be a string of 20 bytes 
 
         // Padding --> We want even chunks to work on
+        let (mut h0, mut h1, mut h2, mut h3, mut h4): (u32,u32,u32,u32,u32) = (H0,H1,H2,H3,H4); // tuple of u32's --> these are accumulator values --> we'll be adding onto them as we go along
         let msg: Vec<u8> = self.pad_message(key);
+
+
         temp_rtn
     }
 
