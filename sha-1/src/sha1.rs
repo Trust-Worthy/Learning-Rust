@@ -16,7 +16,6 @@ impl Sha1 {
 
     /// Lowercase refers to a specific instance of the data type
     pub fn hash(&mut self, key:&str) -> [u8;20] { // changed self 
-        let temp_rtn: [u8; 20] = [2;20];
         // hash will be a string of 20 bytes 
 
         // Padding --> We want even chunks to work on
@@ -28,8 +27,9 @@ impl Sha1 {
         for chunk in msg.chunks(64) { // because we did the padding, we know that we can get an even & exact num of 64 bit chunks
         
             let schedule = self.build_schedule(chunk);
+
             let (mut a, mut b, mut c, mut d, mut e) = (H0, H1, H2, H3, H4);
-            for i in 0..80 {
+            for i in 0..80 { // doing this loop 80 times 
                 let (f, k) = match i {
                      0..=19 => ((b & c) | ((!b) & d), 0x5A827999),
                      20..=39 => (b ^ c ^ d, 0x6ED9EBA1),
@@ -38,15 +38,39 @@ impl Sha1 {
                  };
 
                  // diffusion across different portions of the hash
+                 // needed the mut keyword on a - e because we're changing the values here 
                  let temp = a
                     .rotate_left(5) // rotate operation operation that isn't the same as bit shift again! 
                     .wrapping_add(f)
                     .wrapping_add(e)
                     .wrapping_add(k)
                     .wrapping_add(schedule[i]);
+                e = d;
+                d = c;
+                b = b.rotate_left(30);
+                b = a;
+                a = temp;
+            }
+            // add the compressed chunk to the current hash value.
+            h0 = h0.wrapping_add(a);
+            h1 = h1.wrapping_add(b);
+            h2 = h2.wrapping_add(c);
+            h3 = h3.wrapping_add(d);
+            h4 = h4.wrapping_add(e);
+
+                // * you never want one portion of a variable to impact the end has more than any other variable
         }
 
-        temp_rtn
+        let mut hash = [0u8;20]; // final hash to be returned
+
+        hash[0..4].copy_from_slice(&h0.to_be_bytes());
+        hash[4..8].copy_from_slice(&h1.to_be_bytes());
+        hash[8..12].copy_from_slice(&h2.to_be_bytes());
+        hash[12..16].copy_from_slice(&h3.to_be_bytes());
+        hash[16..20].copy_from_slice(&h4.to_be_bytes());
+
+
+        return hash
     }
 
     fn build_schedule(&mut self, chunk: &[u8]) -> [u32;80] {
