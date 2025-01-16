@@ -15,16 +15,58 @@ impl Sha1 {
     }
 
     /// Lowercase refers to a specific instance of the data type
-    pub fn hash(&self, key:&str) -> [u8;20] {
+    pub fn hash(&mut self, key:&str) -> [u8;20] { // changed self 
         let temp_rtn: [u8; 20] = [2;20];
         // hash will be a string of 20 bytes 
 
         // Padding --> We want even chunks to work on
         let (mut h0, mut h1, mut h2, mut h3, mut h4): (u32,u32,u32,u32,u32) = (H0,H1,H2,H3,H4); // tuple of u32's --> these are accumulator values --> we'll be adding onto them as we go along
-        let msg: Vec<u8> = self.pad_message(key);
+        // --> at the end when we put all of these h values together to get the final 20 byte hash
 
+        let msg: Vec<u8> = self.pad_message(key);
+        
+        for chunk in msg.chunks(64) { // because we did the padding, we know that we can get an even & exact num of 64 bit chunks
+        
+            let schedule = self.build_schedule(chunk);
+            let (mut a, mut b, mut c, mut d, mut e) = (H0, H1, H2, H3, H4);
+            for i in 0..80 {
+                let (f, k) = match i {
+                     0..=19 => ((b & c) | ((!b) & d), 0x5A827999),
+                     20..=39 => (b ^ c ^ d, 0x6ED9EBA1),
+                     40..=59 => ((b & c) | (b & d) | (c & d), 0x8F1BBCDC),
+                     _ => (b ^ c ^ d, 0xCA62C1D6),
+                 };
+
+                 // diffusion across different portions of the hash
+                 let temp = a
+                    .rotate_left(5) // rotate operation operation that isn't the same as bit shift again! 
+                    .wrapping_add(f)
+                    .wrapping_add(e)
+                    .wrapping_add(k)
+                    .wrapping_add(schedule[i]);
+        }
 
         temp_rtn
+    }
+
+    fn build_schedule(&mut self, chunk: &[u8]) -> [u32;80] {
+        let mut schedule: [u32;80] = [0u32; 80]; // going to be filling this up with the first 16 u32 
+
+
+        for (i,block) in chunk.chunks(4).enumerate() { // take a 4 byte integer out at a time and shove it into the array
+            schedule[i] = u32::from_be_bytes(block.try_into().unwrap());
+        }
+
+        // use the first 16 bytes to create teh 17th byte 
+        for i in 16..80  { // 0 - 15 are the first 16 integers
+            // ohh I get it. 17 up to 80 integers are all determined based on the previous one 
+            schedule[i] = schedule[i -3] ^ schedule[i - 8] ^ schedule[i - 14] ^ schedule[i - 16]; // this does a bitwise xor
+            schedule[i] = schedule[i].rotate_left(1) // this is different than bitshifting <<
+            // rotating takes the left most bit and puts it in the rightmost spot and shifts everything over
+            // ex 1011
+            // goes to 0111
+        }
+        return schedule
     }
 
     fn pad_message(&self, input:&str) -> Vec<u8> {
