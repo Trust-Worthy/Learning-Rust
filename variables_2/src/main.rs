@@ -78,12 +78,33 @@ fn expression_ex() {
     println!("The var y is {y}");
 }
 
+fn learning_loops() -> u32 {
+
+    let mut counter: u32 = 0;
+
+    let result: u32 = loop{
+
+        counter += 1;
+
+        if counter == 10 {
+            break counter * 2;
+        }
+
+    };
+
+    return result
+}
+
 fn main() { 
     initial_exercises();
     get_array_index();
     print_labeled_measurement(57, 'F');
     expression_ex();
     
+
+    let x:u32 = learning_loops();
+
+    println!("x is {x}");
 
 
 
