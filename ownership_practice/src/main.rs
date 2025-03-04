@@ -17,6 +17,14 @@ fn main() {
     println!("s2 is a move of s1! {s2}");
 
 
+    // how to create a deep copy!
+
+    let s3: String = s2.clone();
+    println!("s3 has been officially cloned! clone: {s3}");
+
+    
+
+
 
 
 
