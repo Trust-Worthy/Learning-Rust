@@ -62,12 +62,16 @@ fn get_array_index() {
     println!("The value of the element at index {index} is: {element}");
 }
 
+fn print_labeled_measurement(value: u32, unit_label: char) {
+    println!("The value is {value}{unit_label}");
 
+}
 
 
 fn main() { 
     initial_exercises();
     get_array_index();
+    print_labeled_measurement(57, 'F');
     
 
 
