@@ -1,7 +1,7 @@
 fn main() {
     
 
-    let mut x:u8 = 5;
+    let x:u8 = 5;
 
     println!("The value of x is: {x}");
 
@@ -11,7 +11,7 @@ fn main() {
         println!("The value of x in the inner scope is {x}");
     }
 
-    x = 6;
+    let x = 6;
     println!("The value of x is: {x} ");
 
 }
