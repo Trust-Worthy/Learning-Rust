@@ -67,11 +67,22 @@ fn print_labeled_measurement(value: u32, unit_label: char) {
 
 }
 
+fn expression_ex() {
+
+    let y: u32 = {
+
+        let x: u32 = 5;
+        x + 1
+    };
+
+    println!("The var y is {y}");
+}
 
 fn main() { 
     initial_exercises();
     get_array_index();
     print_labeled_measurement(57, 'F');
+    expression_ex();
     
 
 
