@@ -1,7 +1,6 @@
 use std::env;
 use std::fs;
-
-
+use std::process;
 
 
 
@@ -12,19 +11,18 @@ struct  Config {
 
 impl Config {
 
-    fn new (args: &[String]) -> Config  { // I'm really loving this tutorial. It's teaching me how to write code in a rust-like way!
+    fn build (args: &[String]) -> Result<Config, &'static str> { // I'm really loving this tutorial. It's teaching me how to write code in a rust-like way!
         
-    
+        if args.len() < 3 {
+            return Err("Not enough arguments");
+        }
+
         let query:String = args[1].clone(); // String to find in the file
         let file_path:String = args[2].clone(); // path to the file to be searched.
     
-        return Config {query, file_path}
+        Ok(Config { query, file_path })
     }
 }
-
-
-
-
 
 
 fn main() {
@@ -32,8 +30,11 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
 
-    let config: Config = Config::new(&args);
-
+    let config = Config::build(&args).unwrap_or_else(|err| {
+            println!("Problem parsing arguments: {err}");
+            process::exit(1);
+        });
+    
 
     println!("Searching for {}",config.query);
     println!("In file {}",config.file_path);
