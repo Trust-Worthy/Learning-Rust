@@ -33,6 +33,16 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>>{
 
 }
 
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+
+    for line in contents.lines() {
+        if line.contains(query) {
+            
+        }
+    }
+    vec![]
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -44,6 +54,6 @@ mod tests {
 Rust:
 safe, fast, productive.
 Pick three.";
-        
+        assert_eq!(vec!["safe, fast, productive."], search(query,contents)); // Comparing these two outcomes with asser_eq!
     }
 }
