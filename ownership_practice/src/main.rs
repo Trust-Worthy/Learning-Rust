@@ -1,3 +1,18 @@
+
+
+
+
+fn takes_ownership(some_string: String) {
+    println!("{some_string}");
+}
+
+fn makes_copy(some_int: i32) {
+    println!("{some_int}");
+}
+
+
+
+
 fn main() {
     // let s: &str = "hello"; // string literal
 
@@ -28,9 +43,22 @@ fn main() {
 
     s.push_str(", world");
 
+
+    let s1: String = String::from("what up twin!");
+
+    let s2 = s1;
+
     
+    // Passing a variable to a function with either: MOVE or COPY
+    takes_ownership(s);
+    println!("{}",s);
 
+    let x: i32 = 5;
 
+    makes_copy(x); // i32 implements the Copy Trait so x does NOT move into the function
+                            // therefor it's ok to use afterward
+
+    println!("{}",x);
 
 
 
