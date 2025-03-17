@@ -34,6 +34,10 @@ fn main() {
         area_struct(&struct_rect1)
     );
     println!("{:#?}",struct_rect1);
+    
+    let scale = 2;
+    let debug_rect: Rectangle = Rectangle { width: dbg!(30 * scale), height: 50 };
+    dbg!(&debug_rect);
 
 }
 
