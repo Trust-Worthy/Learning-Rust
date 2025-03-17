@@ -5,6 +5,26 @@ struct Rectangle {
     height: u32,
 }
 
+impl Rectangle {
+    // Methods can 
+    // 1. Take ownership of self
+    // 2. Borrow self immutably as is done above --> to read data 
+    // 3. Or, Borrow self mutably
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+
+    fn width(&self) -> bool {
+        self.width > 0
+    }
+
+    fn can_hold(&self, other:&Rectangle) -> bool {
+        self.width > other.width && self.height > other.height
+    }
+
+    
+}
+
 fn main() {
     // will take the width and height of a rectangle specified in pixels and calculate the area of the rectangle
 
@@ -30,10 +50,14 @@ fn main() {
 
     
     println!(
-        "The area of the rectangle is {} square pixels.",
-        area_struct(&struct_rect1)
+        "The area of the STRUCT rectangle is {} square pixels.",
+        struct_rect1.area()
     );
     println!("{:#?}",struct_rect1);
+
+    if struct_rect1.width() {
+        println!("AYYY you a big recty!");
+    }
     
     let scale = 2;
     let debug_rect: Rectangle = Rectangle { width: dbg!(30 * scale), height: 50 };
