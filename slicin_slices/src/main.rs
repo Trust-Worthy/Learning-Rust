@@ -17,7 +17,14 @@ fn main() {
 
     s.clear();
 
-    // word is now invalid because s is an empty string!
+    // word is now invalid because s is an empty string!. Word isn't connected to the STATE of s
+
+
+    // String slices to the rescue
+    let string_to_slice: String = String::from("Hello Twin");
+
+    let hello: &str = &string_to_slice[0..5]; // This is exclusive --> slice comprises index 0 - 4.
+    let twin: &str = &string_to_slice[6..10];
 
     
 }
