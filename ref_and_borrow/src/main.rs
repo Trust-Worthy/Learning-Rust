@@ -12,10 +12,10 @@ fn change(some_string: &mut String){ // change the type annotation to a mutable 
 
  }
 
-fn dangle() -> &String {
+fn dangle() -> String {
     let s = String::from("hello");
 
-    return &s // returning a refernce to a variable that's going to go out of scope to try and create a dangling pointer!c
+    return s // returning a refernce to a variable that's going to go out of scope to try and create a dangling pointer!c
 }
 fn main() {
     
