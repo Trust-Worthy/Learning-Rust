@@ -13,7 +13,7 @@ fn main() {
      */
     let mut s: String = String::from("hello twin");
     
-    let word: &str = first_word(&s); // passing in a reference 
+    let word: &str = first_word(&s[..]); // passing in a reference 
 
     // s.clear();
 
@@ -34,7 +34,7 @@ fn main() {
 }
 
 
-fn first_word(s: &String) -> &str {
+fn first_word(s: &str) -> &str { // This function is now more flexible because I can pass either an &str or a reference to a String! Brilliant
 
     let bytes: &[u8] = s.as_bytes(); // reference to an array of unsigned 8 bit integers
 
