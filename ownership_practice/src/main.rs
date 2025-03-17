@@ -10,7 +10,14 @@ fn makes_copy(some_int: i32) {
     println!("{some_int}");
 }
 
+fn gives_ownership() -> String {
+    let my_string: String = String::from("giving you this");
+    return my_string
+}
 
+fn takes_and_gives_back(a_string: String) -> String {
+    a_string
+}
 
 
 fn main() {
@@ -51,7 +58,7 @@ fn main() {
     
     // Passing a variable to a function with either: MOVE or COPY
     takes_ownership(s);
-    println!("{}",s);
+    // println!("{}",s); Value was moved and is thus now out of scope :(
 
     let x: i32 = 5;
 
@@ -60,7 +67,18 @@ fn main() {
 
     println!("{}",x);
 
+    // returning values can also transfer ownership
+    let received: String = gives_ownership();
+
+    let next_str: String = String::from("ohhh yeaa");
 
 
+    let last = takes_and_gives_back(next_str);
+
+    // println!("{}",next_str); // next_str is out of scope and was moved into last so I can't use it anymore.
+
+
+    // The whole moving and copying can be tedious if you want to "do some operation" on data on the stack, but you don't want to completely transfer ownership
+    // of that variable so that it then goes out of scope and is dropped by the drop function!
 
 }
