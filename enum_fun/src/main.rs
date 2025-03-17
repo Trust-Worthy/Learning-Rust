@@ -6,6 +6,21 @@ enum IpAddrKind {
     V6(String),
 }
 
+enum Message {
+    Quit,
+    Move {x:i32, y: i32},
+    Write(String),
+    ChangeColor(i32,i32,i32),
+}
+
+impl Message {
+    fn call(&self) {
+        // method body def here
+    }
+
+
+}
+
 fn main() {
     // Enums give you a way of saying a value is one of a possible set of values
 
@@ -23,6 +38,10 @@ fn main() {
     let home = IpAddrKind::V4(127,0,0,1);
     let loopback = IpAddrKind::V6(String::from("::1"));
 
+
+    let aye = Message::Write(String::from("we love you bro"));
+
+    aye.call();
 
 
 
