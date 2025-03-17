@@ -13,9 +13,13 @@ fn main() {
      */
     let mut s: String = String::from("hello twin");
     
-    let word: usize = first_word(&s); // passing in a reference 
+    let word: &str = first_word(&s); // passing in a reference 
 
-    s.clear();
+    // s.clear();
+
+    println!("The first word is: {word}");
+
+
 
     // word is now invalid because s is an empty string!. Word isn't connected to the STATE of s
 
@@ -30,20 +34,17 @@ fn main() {
 }
 
 
-fn first_word(s: &String) -> usize {
+fn first_word(s: &String) -> &str {
 
     let bytes: &[u8] = s.as_bytes(); // reference to an array of unsigned 8 bit integers
 
     for (i, &item) in bytes.iter().enumerate() {
-
-        // i is the index and &item is a reference to that index! Brilliant!!! 
-        // this is by specifying a pattern for the tuple. I'll learn more about that in future lessons
         if item == b' ' {
-            return i;
+            return &s[0..i];
         }
     }
 
-    s.len()
+    &s[..]
 
 }
 
