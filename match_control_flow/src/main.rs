@@ -20,10 +20,52 @@ enum Coin {
 
 
 fn main() {
+
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
     
+    println!("{:?}",five);
+
+    let dice_roll = 9;
+
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        _ => (), // example of empty tuple type 
+    }
+
+
+    let config_max = Some(3u8);
+
+    match config_max {
+        Some(max) => println!("to the maxxxxx {}",max),
+        _ => (),
+    }
+
+
+    // if let syntax is more simple in some cases . if let is syntax sugar for match
+    // but I lose the exhaustive checking of a match statement
+    if let Some(max) = config_max {
+        println!("To the max via an if let {max}");
+    }
+
+    let coin = Coin::Quarter(UsState::Colorado);
+    let mut count = 1;
+
+    if let Coin::Quarter(state) = coin {
+        println!("State quarter from US state {state:?}");
+    } else {
+        count += 1;
+    }
 }
 
-fn plus_one(x: Option<i32>) -> Option<i32> {
+fn add_fancy_hat(){}
+fn remove_fancy_hat(){}
+
+fn plus_one(x: Option<i32>) -> Option<i32> { 
+    // Match statements similar to Switch statements in most languages have to cover ALL patterns / possibilities!!!
+    // Matches are exhaustive in Rust!
     match x {
         // I get it now. None is the first field of the Option enum. Some is the second. I can add an 'i' or any other variable to represent whatever 
         // type of Option it is!
