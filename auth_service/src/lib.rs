@@ -1,45 +1,48 @@
 #![allow(dead_code,unused_variables)]
 
-pub struct Credentials {
-    username: String,
-    password: String,
-}
+
 
 mod database {
 
-    enum Status {
+    pub enum Status {
         Connected,
         Interrupted,
     }
 
-    fn connect_to_database() -> Status {
+    pub fn connect_to_database() -> Status {
         return Status::Connected;
     }
 
-    fn get_user() {
+    pub fn get_user() {
         // get user from database
     }
 
 }
 
+mod auth_utils {
 
+    pub fn login(creds: models::Credentials) { // relative path to get to the Creds struct
+        crate::database::get_user(); // absolute path to function inside database module
+    }
+    
+    fn logout() {
+        // log user out...
+    }
 
+    pub mod models {
+        pub struct Credentials {
+            username: String,
+            password: String,
+        }
+    }
 
-fn login(creds: Credentials) {
-    get_user();
 }
-
-fn logout() {
-    // log user out...
-}
-
-
 
 // We want to expose this function
-pub fn authenticate(creds: Credentials) {
+pub fn authenticate(creds: auth_utils::models::Credentials) {
 
-    if let Status::Connected = connect_to_database() {
-        login(creds);
+    if let database::Status::Connected = database::connect_to_database() { //
+        auth_utils::login(creds);
     }
 
 }
