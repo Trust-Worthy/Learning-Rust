@@ -1,6 +1,7 @@
 
 
-
+// This approach allows contents of auth utils to defined in auth utils rust file
+// NOW all of auth_utils.rs sub-modules are defined in a folder called auth_utils
 
 
 pub fn login(creds: models::Credentials) { // relative path to get to the Creds struct

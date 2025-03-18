@@ -12,6 +12,8 @@ mod auth_utils;
 // 3. no file named auth_utils exists so rust looks for a mod.rs file inside of a folder called auth_utils
 
 
+// 2 mod statements above indicate that crate module has 2 sub modules  (database & auth_utils)
+
     
 
 
@@ -22,9 +24,14 @@ mod auth_utils;
 
 
 // use keywords allow for shortcuts so I don't have to type the whole path!
-use auth_utils::models::Credentials; // bringing credentials into SCOPE --> use keyword means referencing full-qualified symbols defined somewhere in module tree
+pub use auth_utils::models::Credentials; // bringing credentials into SCOPE --> use keyword means referencing full-qualified symbols defined somewhere in module tree
 use database::Status; // Bringing the Status Enum INTO SCOPE (this is the proper language to use )
 
+// above --> use statements bring Credentials and Status into scope so that I don't have to type out the fully qualified names.
+
+// use statements can also be used for re-exporting 
+// now Credentials struct is brought into scope and it's being re-exported from the top modules 
+// NOW auth service library is complete!
 
 // We want to expose this function
 pub fn authenticate(creds: Credentials) { // relative path
