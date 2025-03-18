@@ -7,6 +7,16 @@ enum UsState {
     Colorado,
 }
 
+impl UsState {
+    fn existed_in(&self, year: u16) -> bool {
+        match self {
+            UsState::Colorado => year >= 1819,
+            UsState::Alabama => year >= 1945,
+            UsState::Alaska => year >= 1923,
+        }
+    }
+}
+
 
 enum Coin {
     Penny,
@@ -58,6 +68,8 @@ fn main() {
     } else {
         count += 1;
     }
+
+
 }
 
 fn add_fancy_hat(){}
