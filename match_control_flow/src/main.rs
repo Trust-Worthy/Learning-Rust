@@ -80,17 +80,33 @@ fn remove_fancy_hat(){}
 
 fn describe_state_quarter(coin: Coin) -> Option<String> {
 
-    if let Coin::Quarter(state) = coin {
-        if state.existed_in(1900) {
-            Some(format!("{state:?} is pretty old"))
+    // if let Coin::Quarter(state) = coin {
+    //     if state.existed_in(1900) {
+    //         Some(format!("{state:?} is pretty old"))
 
-        } else {
-            Some(format!("{state:?} is relatively new."))
-        } 
+    //     } else {
+    //         Some(format!("{state:?} is relatively new."))
+    //     } 
 
+    // } else {
+    //     None
+    // }
+
+    // if else statement
+
+    let Coin::Quarter(state) = coin else {
+        return None;
+    };
+
+    if state.existed_in(1900) {
+        Some(format!("{state:?} is pretty old, for America!"))
     } else {
-        None
+        Some(format!("{state:?} is relatively new."))
     }
+    
+    
+
+    
 }
 
 fn plus_one(x: Option<i32>) -> Option<i32> { 
