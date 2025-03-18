@@ -1,6 +1,6 @@
 #![allow(dead_code,unused_variables)]
 
-struct Credentials {
+pub struct Credentials {
     username: String,
     password: String,
 }
@@ -18,11 +18,16 @@ fn login(creds: Credentials) {
     get_user();
 }
 
+fn logout() {
+    // log user out...
+}
+
 fn get_user() {
     // get user from database
 }
 
-fn authenticate(creds: Credentials) {
+// We want to expose this function
+pub fn authenticate(creds: Credentials) {
 
     if let Status::Connected = connect_to_database() {
         login(creds);
