@@ -43,6 +43,14 @@ fn main() {
 
     aye.call();
 
+    // Examples using the Option values
+    let some_number= Some(5);
+    let some_char = Some('e');
+
+    let absent_number: Option<i32> = None; // I mean of absent number to be of type i32
+
+
+
 
 
 
