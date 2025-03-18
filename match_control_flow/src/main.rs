@@ -9,6 +9,7 @@ enum UsState {
 
 impl UsState {
     fn existed_in(&self, year: u16) -> bool {
+
         match self {
             UsState::Colorado => year >= 1819,
             UsState::Alabama => year >= 1945,
@@ -69,11 +70,28 @@ fn main() {
         count += 1;
     }
 
+    
+
 
 }
 
 fn add_fancy_hat(){}
 fn remove_fancy_hat(){}
+
+fn describe_state_quarter(coin: Coin) -> Option<String> {
+
+    if let Coin::Quarter(state) = coin {
+        if state.existed_in(1900) {
+            Some(format!("{state:?} is pretty old"))
+
+        } else {
+            Some(format!("{state:?} is relatively new."))
+        } 
+
+    } else {
+        None
+    }
+}
 
 fn plus_one(x: Option<i32>) -> Option<i32> { 
     // Match statements similar to Switch statements in most languages have to cover ALL patterns / possibilities!!!
