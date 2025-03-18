@@ -49,6 +49,16 @@ fn main() {
 
     let absent_number: Option<i32> = None; // I mean of absent number to be of type i32
 
+    // Rust doesn't treat Option enums as values that operations can be performed on
+
+    let x: i8 = 5;
+    let y: Option<i8> =  Some(5);
+
+    // Doesn't work because I have to convert an Option<T> to a T before I can do operations with T.
+    //let sum = x + y;
+
+    // Rust basically gives me the safety to assume that a value is not null when it isn't an Option<T>.
+
 
 
 
