@@ -1,6 +1,11 @@
 use std::vec;
 
-
+#[derive(Debug)]
+enum SpreadsheetCell {
+    Int(i32),
+    Float(f64),
+    Text(String),
+}
 
 
 fn main() {
@@ -46,6 +51,33 @@ fn main() {
     println!("The first element is: {first}");
 
     vecky.push(5);
+
+    for i in &vecky { // using immutable references
+        println!("item = {i}")
+    }
+    
+    
+    // The reference to the vector that the for loop holds prevents simultaneous modification of the whole vector.
+
+    for i in &mut vecky { // using mutable references
+        *i += 50; // get me the value at i / dereference i and add 50 to it
+    }
+
+
+
+    let row = vec![
+        SpreadsheetCell::Int(3),
+        SpreadsheetCell::Text(String::from("blue")),
+        SpreadsheetCell::Float(10.12)
+    ];
+
+    // using enums is super helpful because everything inside of them is technically the same type so we can use 
+    // vecs to store a bunch of them together in memory
+
+    for i in &row {
+        println!(" item in the spreadsheet is {:?}",*i);
+    }
+
 
 
 
