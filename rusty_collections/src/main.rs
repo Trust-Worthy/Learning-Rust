@@ -1,4 +1,5 @@
-use std::vec;
+
+use std::{collections::HashMap, hash::Hash};
 
 mod string;
 
@@ -11,8 +12,12 @@ enum SpreadsheetCell {
 }
 
 
-fn main() {
-    
+fn string_fun() {
+
+    string::string_practice();
+}
+
+fn vec_fun() {
     // Vectors can only store values of the same type
 
     let mut v: Vec<i32> = Vec::new();
@@ -80,10 +85,20 @@ fn main() {
     for i in &row {
         println!(" item in the spreadsheet is {:?}",*i);
     }
+}
+
+fn main() {
+    
+    let mut scores: HashMap<String, i32> = HashMap::new();
+
+    scores.insert(String::from("blue team"), 10);
+    scores.insert(String::from("yellow team"), 34);
+
+    
 
 
 
-    string::string_practice();
+
 
 
 
