@@ -88,6 +88,10 @@ fn native_read_username_from_file() -> Result<String, io::Error> {
     
 }
 
+fn last_char_of_first_line(text: &str) -> Option<char> {
+    text.lines().next()?.chars().last() // this chain is kinda wild.
+}
+
 fn main() {
     
     // There are two types of errors in this rusty world
