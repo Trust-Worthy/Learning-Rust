@@ -1,4 +1,4 @@
-use std::fs::File;
+use std::fs::{self, File};
 use std::io::{self, Read};
 
 fn panic_fun() {
@@ -83,6 +83,11 @@ fn super_clean_read_username_from_file() -> Result<String, io::Error> {
     Ok(username)
 }
 
+fn native_read_username_from_file() -> Result<String, io::Error> {
+    fs::read_to_string("hello.txt") // built in method 
+    
+}
+
 fn main() {
     
     // There are two types of errors in this rusty world
@@ -99,7 +104,9 @@ fn main() {
 
 
 
+    // The return type of the function has to be compatible with what ? may return if something fails / there's an error
 
+    // let get_file = File::open("ayyy.txt")?; // function has to return Result<T, E> (OK & Err) or Option (Same & None)
 
 
 
