@@ -22,10 +22,18 @@ fn main() {
 
     let third_ele: Option<&i32> = v.get(2); // getting the element at the 2nd index in a different way
 
+    // using the .get method on a vector is really helpful because it's more SAFE. it returns an Option<&T> that I can use a match statement with
+    // to validate the item
+
     match third_ele {
         Some(ele) => println!("Third element in the vector is {ele}"),
         None => println!("Third element in the vector is NUTHIN"),
     }
+
+    let does_not_exist = &macro_vec[100];
+    let does_not_exist = macro_vec.get(100); // this method won't panick. It will just return NONE. which is super freaking helpful
+
+
 
 
 
