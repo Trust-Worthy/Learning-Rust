@@ -135,10 +135,24 @@ fn main() {
     scores.entry(String::from("red team")).or_insert(0);
 
 
+    // updating a value based on an old value
+    let text = "hello world wonderful world";
+
+    let mut map:HashMap<&str,u8> = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count +=1;
+    }
 
     for (key,value) in &scores {
         println!("{key}: {value}");
     }
+
+    for (key,value) in &map {
+        println!("{key}: {value}");
+    }
+
 
 
 
