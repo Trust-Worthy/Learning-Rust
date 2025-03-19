@@ -1,3 +1,4 @@
+use std::error::Error;
 use std::fs::{self, File};
 use std::io::{self, Read};
 
@@ -92,7 +93,7 @@ fn last_char_of_first_line(text: &str) -> Option<char> {
     text.lines().next()?.chars().last() // this chain is kinda wild.
 }
 
-fn main() {
+fn main() -> Result<(), Box<dyn Error>> {
     
     // There are two types of errors in this rusty world
     // 1. Recoverable errors --> usually report the bug to the user and retry the operation
@@ -110,8 +111,8 @@ fn main() {
 
     // The return type of the function has to be compatible with what ? may return if something fails / there's an error
 
-    // let get_file = File::open("ayyy.txt")?; // function has to return Result<T, E> (OK & Err) or Option (Same & None)
+    let get_file = File::open("ayyy.txt")?; // function has to return Result<T, E> (OK & Err) or Option (Same & None)
 
-
+    Ok(())
 
 }
