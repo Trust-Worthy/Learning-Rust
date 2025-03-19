@@ -1,6 +1,13 @@
+use std::{fs::File, io::ErrorKind};
 
+fn panic_fun() {
 
-
+    panic!("crash and burn");
+    
+    let v = vec![1,2,3];
+    
+    v[99]; // this will panic
+}
 
 
 fn main() {
@@ -11,10 +18,28 @@ fn main() {
     // there are no exceptions in rust! instead Result<T, E> is used for recoverable
     // and the macro panic! is used for those unrecoverable ones
 
-    // panic!("crash and burn");
 
-    let v = vec![1,2,3];
+    let greeting_file_result = File::open("hello.txt"); // return type here is a Result<T,E>
 
-    v[99]; // this will panic
+    let greeting_file = match greeting_file_result {
+        Ok(file) => file,
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => match File::create("hello.txt") {
+                Ok(fc) => fc,
+                Err(e) => panic!("Error creating the file: {e:?}"),
+            },
+            other_error => {
+                panic!("Bruh still not working for some reason {other_error:?}");
+            }
+        },
+    };
+
+    
+
+
+
+
+
+
 
 }
