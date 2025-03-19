@@ -41,7 +41,26 @@ pub fn string_practice() {
 
     let game = format!("{s1}-{s2}-{s3}");
 
-    println!("Game: {game}")
+    println!("Game: {game}");
+
+    // an index into the string’s bytes will not always correlate to a valid Unicode scalar value.
+    // this is why you can't just index strings in rust like a vector
+    
+    // be specific when messing around with strings and their contents
+    println!("The english alphabet as chars:");
+    for c in "abcdefghijklmnopqrstuvwxyz".chars() {
+        println!("{c}");
+    }
+
+    println!("The english alphabet as byte values from Unicode");
+
+    for b in "abcdefghijklmnopqrstuvwxyz".bytes() {
+        println!("{b}");
+    }
+
+
+
+
 
 
 
