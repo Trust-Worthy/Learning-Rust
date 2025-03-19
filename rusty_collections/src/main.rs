@@ -1,3 +1,5 @@
+use std::vec;
+
 
 
 
@@ -30,8 +32,20 @@ fn main() {
         None => println!("Third element in the vector is NUTHIN"),
     }
 
-    let does_not_exist = &macro_vec[100];
+    // let does_not_exist = &macro_vec[100];
     let does_not_exist = macro_vec.get(100); // this method won't panick. It will just return NONE. which is super freaking helpful
+
+
+    // REMEMBER OWNERSHIP principles 
+    let mut vecky = vec![1,2,3,4];
+
+    let first = &vecky[0];
+
+    // Can't have bot a mutable reference and immutable reference in the same scope!
+    // so this has to go first!
+    println!("The first element is: {first}");
+
+    vecky.push(5);
 
 
 
