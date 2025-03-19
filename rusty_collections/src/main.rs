@@ -88,18 +88,57 @@ fn vec_fun() {
 }
 
 fn main() {
+
+    // just like vectors hashmaps store their data on the heap
+    // all of the keys of a hashmap must have the same type
+
     
     let mut scores: HashMap<String, i32> = HashMap::new();
 
     scores.insert(String::from("blue team"), 10);
     scores.insert(String::from("yellow team"), 34);
 
+    let team_name = String::from("blue team");
+
+    let blue_score = scores.get(&team_name).copied().unwrap_or(0);
+    // get method returns an Option<&V>
+
+    // above 
+    // 1. calls get method on hashmap
+    // 2. calls copied method on the returned value Option<&V> to get Option<i32> rather than Option<&i32> 
+    // 3. then unwrap_or to set score to zero if scores doesn’t have an entry for the key.
+
     
 
+    // Ownership and hashmaps
+    // for types like i32 that have the copy trait, they're copied into the hashmap
+    // for types like String. the values are MOVED and the hashmpa now OWNS them!
 
 
 
 
+    let field_name = String::from("First");
+    let field_value = String::from("val");
+
+    let mut hashy:HashMap<String,String> = HashMap::new();
+
+
+    hashy.insert(field_name, field_value); // instead insert references but then you get into dealing with lifetimes! How long will a reference last for?
+    // println!("name = {field_name} value = {field_value}"); // this is invalid. the hashmap has ownership
+
+
+    scores.insert(String::from("blue team"), 23);
+
+
+    // checking if an entry already exists in a map
+    scores.entry(String::from("blue team")).or_insert(0);
+    scores.entry(String::from("red team")).or_insert(0);
+
+
+
+    for (key,value) in &scores {
+        println!("{key}: {value}");
+    }
 
 
 
