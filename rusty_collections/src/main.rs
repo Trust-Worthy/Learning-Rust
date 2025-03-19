@@ -1,5 +1,8 @@
 use std::vec;
 
+mod string;
+
+
 #[derive(Debug)]
 enum SpreadsheetCell {
     Int(i32),
@@ -79,6 +82,8 @@ fn main() {
     }
 
 
+
+    string::string_practice();
 
 
 
