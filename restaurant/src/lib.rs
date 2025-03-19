@@ -83,4 +83,11 @@ mod customer {
 }
 
 
-use std::collections::HashMap; // std crate, collections module, Hashmap struct... Beautiful idiomatic rust at its finest
+// the weird case where two items with the same name are brought into the same scope.
+// can use the as keyword or just use fmt::Result and io::Result respectively
+use std::fmt::Result as fmtResult;
+use std::io::Result as IoResult;
+
+
+
+
