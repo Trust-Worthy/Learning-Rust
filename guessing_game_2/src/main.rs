@@ -5,7 +5,24 @@ use std::cmp::Ordering;
 
 
 pub struct Guess {
-    value:
+    value: i32,
+}
+
+impl Guess {
+
+    // constructor
+    pub fn new(value: i32) -> Guess {
+        if value < 1|| value > 100 {
+            panic!("Try again. The secret number will be between 1 and 100.x  ");
+            
+        }
+
+        Guess {value}
+    }
+
+    pub fn value(&self) -> i32 {
+        self.value
+    }
 }
 
 fn main() {
@@ -33,10 +50,7 @@ fn main() {
             Err(_) => continue
         };
 
-        if guess < 1|| guess > 100 {
-            println!("Try again. The secret number will be between 1 and 100.x  ");
-            continue;
-        }
+        
 
 
         println!("You guessed: {}",guess);
